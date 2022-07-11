@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import {useState, useEffect} from "react"
 import './App.css';
+import Box from "./box"
+const App = () => {  
 
-function App() {
+  const [user, setUser] = useState("Steve");
+
+  // const useState = (initialval) => {
+  //   let state = initialval;
+  //   const setState = (newVal) => {
+  //     state = newVal
+  //   }
+  // return [state, setState];
+  // }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    {/* <h1>{user}</h1> */}
+    <Box name={user} />
+    <Box name="Gary" />
+    <Box name="Clive" />
+    <Box name="Kevin" />
+    <input onChange={(event) => setUser(event.target.value)} />
+    {user && <Box name="Tony" />}
+    {user? <Box name="Jeff" /> : <Box name="Not jeff" />}
     </div>
   );
 }
