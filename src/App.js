@@ -1,29 +1,43 @@
-import {useState, useEffect} from "react"
+import {useState, useEffect} from "react" //useEffect goes after useState
 import './App.css';
-import Box from "./box"
+import SignUp from "./components/SignOrLog"
+import Image from "./components/image";
 const App = () => {  
 
-  const [user, setUser] = useState("Steve");
+  const [user, setUser] = useState();
+ const [photos, setPhotos] = useState([]);
 
-  // const useState = (initialval) => {
-  //   let state = initialval;
-  //   const setState = (newVal) => {
-  //     state = newVal
-  //   }
-  // return [state, setState];
-  // }
+  const fetchImages = async () => {
+    const response = await fetch("https://picsum.photos/v2/list");
+    const data = await response.json();
+   setPhotos(data);
+  };
+  useEffect(() => {
+    fetchImages(setPhotos);
+  }, []);
+
+
+  
   return (
     <div className="App">
-    {/* <h1>{user}</h1> */}
-    <Box name={user} />
-    <Box name="Gary" />
-    <Box name="Clive" />
-    <Box name="Kevin" />
-    <input onChange={(event) => setUser(event.target.value)} />
-    {user && <Box name="Tony" />}
-    {user? <Box name="Jeff" /> : <Box name="Not jeff" />}
-    </div>
+     <SignUp setter={setUser} />
+    <h1>{user}</h1>
+    {/* <button onClick = {() => fetchImages()}>Click me</button> */}
+    
+    <div>
+     {user && photos.map((item, i)=>{
+      return <Image key={i} author={item.author} url={item.download_url} />;
+      
+
+
+
+     
+     })} </div> 
+   </div>
+
+  
   );
 }
 
 export default App;
+
