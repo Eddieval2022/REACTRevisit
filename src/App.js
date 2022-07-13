@@ -1,39 +1,23 @@
-import {useState, useEffect} from "react" //useEffect goes after useState
+import {useState} from "react" //useEffect goes after useState
+import { BrowserRouter, Routes, Route  } from "react-router-dom";
+import SignUp from "./components/SignOrLog";
 import './App.css';
-import SignUp from "./components/SignOrLog"
-import Image from "./components/image";
+import PhotoFeed from "./pages/photofeed";
+// import { signUp } from "./utils";
+
 const App = () => {  
 
   const [user, setUser] = useState();
- const [photos, setPhotos] = useState([]);
-
-  const fetchImages = async () => {
-    const response = await fetch("https://picsum.photos/v2/list");
-    const data = await response.json();
-   setPhotos(data);
-  };
-  useEffect(() => {
-    fetchImages(setPhotos);
-  }, []);
 
 
   
   return (
-    <div className="App">
-     <SignUp setter={setUser} />
-    <h1>{user}</h1>
-    {/* <button onClick = {() => fetchImages()}>Click me</button> */}
-    
-    <div>
-     {user && photos.map((item, i)=>{
-      return <Image key={i} author={item.author} url={item.download_url} />;
-      
-
-
-
-     
-     })} </div> 
-   </div>
+<BrowserRouter classname="App">
+  <Routes>
+    <Route path="/" element={<SignUp setter={setUser} user={user}/>}/>
+    <Route path="/photofeed" element={<PhotoFeed user={user}/>}/>
+  </Routes>
+</BrowserRouter>
 
   
   );

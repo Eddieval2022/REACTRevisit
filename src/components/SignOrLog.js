@@ -1,15 +1,15 @@
 import {useState} from "react";
-import { signUp } from "../utils";
+import { SignUp } from "../utils";
 
 
 
-const SignUp= ({setter}) => {
+const SignUpUser= ({setter}) => {
     const [username, setUsername,] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const submitHandler = async (e) => {
 e.preventDefault()
-await signUp(username, email, password, setter)
+await SignUp(username, email, password, setter)
     }
     return(
         <form onSubmit={submitHandler}>
@@ -20,4 +20,4 @@ await signUp(username, email, password, setter)
         </form>
     )
 }
-export default SignUp;
+export default SignUpUser;

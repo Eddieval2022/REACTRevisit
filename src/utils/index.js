@@ -1,4 +1,4 @@
-export const signUp = async(username, email, password, setter) => {
+export const SignUp = async(username, email, password, setter) => {
     try{
 const response = await fetch("http://localhost:5001/user", {
     method: "POST", //HTTP Verb
@@ -9,11 +9,14 @@ const response = await fetch("http://localhost:5001/user", {
 }),//  body that has been turned to json with stringify
 });
 const data = await response.json();
-// console.log(data); 
+
+console.log(data); 
 setter(data.user.username);
+
 
     }catch(error){
         console.log(error);
     }
 }
+
 
